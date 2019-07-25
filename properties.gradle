@@ -1,0 +1,7 @@
+ext.BUILD_TOOLS_VERSION = "26.0.2"
+ext.SDK_VERSION = 28
+ext.MIN_SDK_VERSION = 19
+ext.VERSION_NAME = "1.0.0"
+ext.VERSION_CODE = 1
+ext.MULTIDEX_STATE = false
+ext.GROUP_ID="com.sagrishin.collageimageview"
