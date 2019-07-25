@@ -103,7 +103,7 @@ class CollageAdapter(images: List<Bitmap>) : RecyclerView.Adapter<BasePhotoGridH
                 fwov_image4.setImageBitmap(images[3])
 
                 if (images.size > 4) {
-                    fwov_load_more.text = """${images.size - 4}+"""
+                    fwov_load_more.text = """+${images.size - 4}"""
                     fwov_load_more.visibility = View.VISIBLE
                 } else {
                     fwov_load_more.visibility = View.GONE
@@ -122,7 +122,7 @@ class CollageAdapter(images: List<Bitmap>) : RecyclerView.Adapter<BasePhotoGridH
                 fwoh_image4.setImageBitmap(images[3])
 
                 if (images.size > 4) {
-                    fwoh_load_more.text = """${images.size - 4}+"""
+                    fwoh_load_more.text = """+${images.size - 4}"""
                     fwoh_load_more.visibility = View.VISIBLE
                 } else {
                     fwoh_load_more.visibility = View.GONE
