@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CollageImageView</string>
+    <string name="count_more_format" translatable="false">+%1$d</string>
 </resources>

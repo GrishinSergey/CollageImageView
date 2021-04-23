@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sagrishin.photogridlayout">
+    package="com.sagrishin.collageview">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+<!--    <application android:theme="@style/CollageTheme" />-->
 
 </manifest>
