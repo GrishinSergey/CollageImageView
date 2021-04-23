@@ -17,13 +17,13 @@ android {
         debug {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            buildConfigField "String", "UNSPLASH_API_KEY", properties.getProperty('api.key')
+            def defaultApiKey = 'PLACE YOUR UNSPLASH API KEY HERE FOR RUN TEST APP'
+
+            buildConfigField "String", "UNSPLASH_API_KEY", properties.getProperty('api.key') ?: defaultApiKey
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-
-            buildConfigField "String", "UNSPLASH_API_KEY", 'PLACE YOUR UNSPLASH API KEY HERE FOR RUN TEST APP'
         }
     }
 
