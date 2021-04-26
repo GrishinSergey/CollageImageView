@@ -22,7 +22,7 @@ allprojects {
 <p>2) Then add to your app (or another module, where you will use the lib) this dependency:</p>
 
 ```gradle
-implementation 'com.github.GrishinSergey:CollageImageView:v2.0.0'
+implementation 'com.github.GrishinSergey:CollageImageView:v2.0.1'
 ```
 
 <p>3) In your layout you should place this:</p>
@@ -47,7 +47,8 @@ val radius = TypedValue.applyDimension(
     TypedValue.COMPLEX_UNIT_DIP,
     4F, // the radius value
     context.resources.displayMetrics
-).toInt()
+)
+collageViewId.itemCornerRadius = radius.toInt()
 ```
 
 Here is an example, how to fill list of urls to images. Let's say you have list of images from your API, so you can convert them to CollageItemUrlData
@@ -58,21 +59,23 @@ val images = photos.map { singlePhoto ->
         this.height = singlePhoto.height
     }
 }
+collageViewId.setItemDatas(images)
 ```
 
-Last, which is necessary, call setup method. It takes now three params:
-- list of CollageItemUrlData,
-- radius
-- listener of clicks
+Also it is possible to listen, on which image user clicked:
 ```kotlin
-collageViewId.setup(images, radius) { position ->
+collageViewId.clickListener = OnCollageClickListener { position ->
     Toast.makeText(context, "clicked position is $position", Toast.LENGTH_SHORT).show()
 }
+```
+
+Last, which is necessary, call showCollage method:
+```kotlin
+collageViewId.showCollage()
 ```
 
 <h3>What should be upgraded:</h3>
 <ol>
   <li>Make thumbnail and error holders which will be shown, if image still loading or if an error acquired</li>
-  <li>Make params of CollageView::setup optional</li>
   <li>Create proguard file</li>
 </ol>
