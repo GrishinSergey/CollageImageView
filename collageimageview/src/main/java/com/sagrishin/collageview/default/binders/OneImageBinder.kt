@@ -8,7 +8,7 @@ import com.sagrishin.collageview.OnCollageClickListener
 import kotlinx.android.synthetic.main.layout_collage_1_image.view.*
 
 class OneImageBinder(
-    private val attachment: CollageItemData,
+    private val itemData: CollageItemData,
     private val itemPreviewLoader: ItemPreviewLoader
 ) : CollageBinder() {
 
@@ -16,7 +16,7 @@ class OneImageBinder(
         with(view) {
             primaryImage.itemPreviewLoader = itemPreviewLoader
             primaryImage.radius = itemCornerRadius.toFloat()
-            primaryImage.itemData = attachment
+            primaryImage.itemData = itemData
 
             clickListener?.let { primaryImage.setOnClickListener { clickListener.invoke(0) } }
         }

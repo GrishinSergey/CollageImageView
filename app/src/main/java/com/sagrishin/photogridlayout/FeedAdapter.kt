@@ -1,10 +1,10 @@
 package com.sagrishin.photogridlayout
 
-import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.sagrishin.collageview.OnCollageClickListener
 import kotlinx.android.synthetic.main.feed_post_item.view.*
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.PostViewHolder>() {
@@ -37,15 +37,13 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.PostViewHolder>() {
         fun bind(post: FeedData) {
             with(itemView) {
                 feed_post.itemPreviewLoader = GlideItemPreviewLoaderImpl.Builder(context).build()
-
-                val radius = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    4F,
-                    context.resources.displayMetrics
-                ).toInt()
-                feed_post.setup(post.images, radius) { position ->
+                feed_post.itemCornerRadius = 4F.dpToPx(context).toInt()
+                feed_post.clickListener = OnCollageClickListener { position ->
                     Toast.makeText(context, "clicked position is $position", Toast.LENGTH_SHORT).show()
                 }
+                feed_post.setItemDatas(post.images)
+
+                feed_post.showCollage()
             }
         }
     }

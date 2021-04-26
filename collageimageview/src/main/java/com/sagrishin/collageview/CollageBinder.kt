@@ -21,7 +21,7 @@ abstract class CollageBinder {
         abstract operator fun invoke(
             context: Context,
             collageView: CollageView,
-            attachments: List<CollageItemData>,
+            itemDatas: List<CollageItemData>,
             itemPreviewLoader: ItemPreviewLoader
         ): CollageBinder
 

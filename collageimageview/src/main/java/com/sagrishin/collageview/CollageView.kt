@@ -14,11 +14,9 @@ open class CollageView @JvmOverloads constructor(
     lateinit var itemPreviewLoader: ItemPreviewLoader
     var factory: CollageBinder.Factory = DefaultCollageBinderFactoryImpl()
     var clickListener: OnCollageClickListener? = null
-        protected set
+
     var itemCornerRadius: Int = 0
-        protected set
-    lateinit var attachments: List<CollageItemData>
-        protected set
+    protected lateinit var collageItemDatas: List<CollageItemData>
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         /**
@@ -29,24 +27,27 @@ open class CollageView @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, widthMeasureSpec)
     }
 
-    open fun setup(attachments: List<CollageItemUrlData>, cornerRadius: Int, clickListener: OnCollageClickListener) {
-        require(attachments.isNotEmpty()) { "attachments list can't be empty" }
-        this.attachments = attachments
-        this.itemCornerRadius = cornerRadius
-        this.clickListener = clickListener
+    /**
+     * [itemDatas] is List of items to preview in collage. This list can't be empty,
+     * because view doesn't know, what to do in this case, so you have to prepare non
+     * empty list for CollageView or handle case, when it is empty by yourself
+     */
+    open fun setItemDatas(itemDatas: List<CollageItemData>) {
+        require(itemDatas.isNotEmpty()) { "itemDatas list can't be empty" }
+        this.collageItemDatas = itemDatas
+    }
 
-        attachments.filterIsInstance<CollageItemUriData>().forEach { it.initSizes(context) }
-
+    open fun showCollage() {
         removeAllViews()
 
         val binder = factory(
             context = context,
             collageView = this,
-            attachments = attachments,
+            itemDatas = collageItemDatas,
             itemPreviewLoader = itemPreviewLoader,
         )
 
-        binder(this, clickListener, cornerRadius)
+        binder(this, clickListener, this.itemCornerRadius)
     }
 
 }

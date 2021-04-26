@@ -7,129 +7,121 @@ import com.sagrishin.collageview.default.binders.*
 
 class DefaultCollageBinderFactoryImpl : CollageBinder.Factory() {
 
-    private enum class Orientation {
-        HORIZONTAL, VERTICAL
-    }
-
     override fun invoke(
         context: Context,
         collageView: CollageView,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         itemPreviewLoader: ItemPreviewLoader
     ): CollageBinder {
-        return when (attachments.size) {
-            1 -> setupCollageForOneAttachment(
+        return when (itemDatas.size) {
+            1 -> setupCollageForOneItemData(
                 context = context,
-                attachments = attachments,
+                itemDatas = itemDatas,
                 collageView = collageView,
                 itemPreviewLoader = itemPreviewLoader,
             )
-            2 -> setupCollageForTwoAttachments(
+            2 -> setupCollageForTwoItemDatas(
                 context = context,
-                attachments = attachments,
+                itemDatas = itemDatas,
                 collageView = collageView,
                 itemPreviewLoader = itemPreviewLoader,
-                isFirstImageVertical = getCollageOrientation(attachments) == Orientation.VERTICAL
+                isFirstImageVertical = itemDatas.first().run { height > width }
             )
-            3 -> setupCollageForThreeAttachments(
+            3 -> setupCollageForThreeItemDatas(
                 context = context,
-                attachments = attachments,
+                itemDatas = itemDatas,
                 collageView = collageView,
                 itemPreviewLoader = itemPreviewLoader,
-                isFirstImageVertical = getCollageOrientation(attachments) == Orientation.VERTICAL
+                isFirstImageVertical = itemDatas.first().run { height > width }
             )
-            4 -> setupCollageForFourAttachments(
+            4 -> setupCollageForFourItemDatas(
                 context = context,
-                attachments = attachments,
+                itemDatas = itemDatas,
                 collageView = collageView,
                 itemPreviewLoader = itemPreviewLoader,
-                isFirstImageVertical = getCollageOrientation(attachments) == Orientation.VERTICAL
+                isFirstImageVertical = itemDatas.first().run { height > width }
             )
-            else -> setupCollageForFiveAttachments(
+            else -> setupCollageForFiveItemDatas(
                 context = context,
-                attachments = attachments,
+                itemDatas = itemDatas,
                 collageView = collageView,
                 itemPreviewLoader = itemPreviewLoader,
-                isFirstImageVertical = getCollageOrientation(attachments) == Orientation.VERTICAL
+                isFirstImageVertical = itemDatas.first().run { height > width }
             )
         }
     }
 
-    private fun getCollageOrientation(attachments: List<CollageItemData>): Orientation {
-        return if (attachments.first().run { height > width }) Orientation.VERTICAL else Orientation.HORIZONTAL
-    }
-
-    private fun setupCollageForOneAttachment(
+    private fun setupCollageForOneItemData(
         context: Context,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         collageView: CollageView,
         itemPreviewLoader: ItemPreviewLoader
     ): OneImageBinder {
         View.inflate(context, R.layout.layout_collage_1_image, collageView)
-        return OneImageBinder(attachments.first(), itemPreviewLoader)
+        return OneImageBinder(itemDatas.first(), itemPreviewLoader)
     }
 
-    private fun setupCollageForTwoAttachments(
+    private fun setupCollageForTwoItemDatas(
         context: Context,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         collageView: CollageView,
         itemPreviewLoader: ItemPreviewLoader,
         isFirstImageVertical: Boolean
     ): CollageBinder {
         return if (isFirstImageVertical) {
             View.inflate(context, R.layout.layout_collage_2_vertical, collageView)
-            TwoImagesFirstVerticalBinder(attachments, itemPreviewLoader)
+            TwoImagesFirstVerticalBinder(itemDatas, itemPreviewLoader)
         } else {
             View.inflate(context, R.layout.layout_collage_2_horizontal, collageView)
-            TwoImagesFirstHorizontalBinder(attachments, itemPreviewLoader)
+            TwoImagesFirstHorizontalBinder(itemDatas, itemPreviewLoader)
         }
     }
 
-    private fun setupCollageForThreeAttachments(
+    private fun setupCollageForThreeItemDatas(
         context: Context,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         collageView: CollageView,
         itemPreviewLoader: ItemPreviewLoader,
         isFirstImageVertical: Boolean
     ): CollageBinder {
         return if (isFirstImageVertical) {
             View.inflate(context, R.layout.layout_collage_2_small_1_big_vertical, collageView)
-            ThreeImagesFirstVerticalBinder(attachments, itemPreviewLoader)
+            ThreeImagesFirstVerticalBinder(itemDatas, itemPreviewLoader)
         } else {
             View.inflate(context, R.layout.layout_collage_2_small_1_big_horizontal, collageView)
-            ThreeImagesFirstHorizontalBinder(attachments, itemPreviewLoader)
+            ThreeImagesFirstHorizontalBinder(itemDatas, itemPreviewLoader)
         }
     }
 
-    private fun setupCollageForFourAttachments(
+    private fun setupCollageForFourItemDatas(
         context: Context,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         collageView: CollageView,
         itemPreviewLoader: ItemPreviewLoader,
         isFirstImageVertical: Boolean
     ): CollageBinder {
         return if (isFirstImageVertical) {
             View.inflate(context, R.layout.layout_collage_3_small_1_big_vertical, collageView)
-            FourImagesFirstVerticalBinder(attachments, itemPreviewLoader)
+            FourImagesFirstVerticalBinder(itemDatas, itemPreviewLoader)
         } else {
             View.inflate(context, R.layout.layout_collage_3_small_1_big_horizontal, collageView)
-            FourImagesFirstHorizontalBinder(attachments, itemPreviewLoader)
+            FourImagesFirstHorizontalBinder(itemDatas, itemPreviewLoader)
         }
     }
 
-    private fun setupCollageForFiveAttachments(
+    private fun setupCollageForFiveItemDatas(
         context: Context,
-        attachments: List<CollageItemData>,
+        itemDatas: List<CollageItemData>,
         collageView: CollageView,
         itemPreviewLoader: ItemPreviewLoader,
         isFirstImageVertical: Boolean
     ): CollageBinder {
         return if (isFirstImageVertical) {
             View.inflate(context, R.layout.layout_collage_4_small_1_big_vertical, collageView)
-            FiveImagesFirstVerticalBinder(attachments, itemPreviewLoader, attachments.size > 5)
+            FiveImagesFirstVerticalBinder(itemDatas, itemPreviewLoader, itemDatas.size > 5)
         } else {
             View.inflate(context, R.layout.layout_collage_4_small_1_big_horizontal, collageView)
-            FiveImagesFirstHorizontalBinder(attachments, itemPreviewLoader, attachments.size > 5)
+            FiveImagesFirstHorizontalBinder(itemDatas, itemPreviewLoader, itemDatas.size > 5)
         }
     }
 

@@ -1,8 +1,6 @@
 package com.sagrishin.collageview
 
-import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.net.Uri
 
@@ -25,7 +23,7 @@ abstract class CollageItemData {
 
 
 /**
- * This child -- is for most popular case, when you user images from your API. In this case
+ * This child -- is for most popular case, when you use images from your API. In this case
  * API can send you not only url to image but width&height values for it. Otherwise, if it
  * is not possible, you should load them by yourself.
  */
@@ -49,24 +47,6 @@ class CollageItemUriData constructor(
 
     override var width: Int = Int.MIN_VALUE
     override var height: Int = Int.MIN_VALUE
-
-    fun initSizes(context: Context) {
-        if ((width != Int.MIN_VALUE) && (height != Int.MIN_VALUE)) return
-
-        try {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-
-            context.contentResolver.openInputStream(imageUri).use {
-                BitmapFactory.decodeStream(it, null, options)
-                width = options.outWidth
-                height = options.outHeight
-            }
-        } catch (e: Exception) {
-            width = 0
-            height = 0
-        }
-    }
 
 }
 
