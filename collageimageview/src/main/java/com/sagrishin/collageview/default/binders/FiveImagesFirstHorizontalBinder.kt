@@ -5,7 +5,7 @@ import com.sagrishin.collageview.*
 import kotlinx.android.synthetic.main.layout_collage_4_small_1_big_horizontal.view.*
 
 class FiveImagesFirstHorizontalBinder(
-    private val attachments: List<CollageItemData>,
+    private val itemDatas: List<CollageItemData>,
     private val itemPreviewLoader: ItemPreviewLoader,
     private val showCountMore: Boolean
 ) : CollageBinder() {
@@ -13,28 +13,28 @@ class FiveImagesFirstHorizontalBinder(
     override operator fun invoke(view: View, clickListener: OnCollageClickListener?, itemCornerRadius: Int) {
         with(view) {
             primaryImage.itemPreviewLoader = itemPreviewLoader
-            primaryImage.itemData = attachments[0]
+            primaryImage.itemData = itemDatas[0]
             primaryImage.radius = itemCornerRadius.toFloat()
 
             smallImage1.itemPreviewLoader = itemPreviewLoader
-            smallImage1.itemData = attachments[1]
+            smallImage1.itemData = itemDatas[1]
             smallImage1.radius = itemCornerRadius.toFloat()
 
             smallImage2.itemPreviewLoader = itemPreviewLoader
-            smallImage2.itemData = attachments[2]
+            smallImage2.itemData = itemDatas[2]
             smallImage2.radius = itemCornerRadius.toFloat()
 
             smallImage3.itemPreviewLoader = itemPreviewLoader
-            smallImage3.itemData = attachments[3]
+            smallImage3.itemData = itemDatas[3]
             smallImage3.radius = itemCornerRadius.toFloat()
 
             smallImage4.itemPreviewLoader = itemPreviewLoader
-            smallImage4.itemData = attachments[4]
+            smallImage4.itemData = itemDatas[4]
             smallImage4.radius = itemCornerRadius.toFloat()
 
             if (showCountMore) {
                 listOf(countMoreShadow, countMoreText).isVisible = true
-                countMoreText.text = view.context.getString(R.string.count_more_format, attachments.size - 5)
+                countMoreText.text = view.context.getString(R.string.count_more_format, itemDatas.size - 5)
 
                 clickListener?.let {
                     countMoreShadow.setOnClickListener { clickListener.invoke(null) }

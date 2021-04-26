@@ -8,26 +8,26 @@ import com.sagrishin.collageview.OnCollageClickListener
 import kotlinx.android.synthetic.main.layout_collage_3_small_1_big_horizontal.view.*
 
 class FourImagesFirstHorizontalBinder(
-    private val attachments: List<CollageItemData>,
+    private val itemDatas: List<CollageItemData>,
     private val itemPreviewLoader: ItemPreviewLoader
 ) : CollageBinder() {
 
     override operator fun invoke(view: View, clickListener: OnCollageClickListener?, itemCornerRadius: Int) {
         with(view) {
             primaryImage.itemPreviewLoader = itemPreviewLoader
-            primaryImage.itemData = attachments[0]
+            primaryImage.itemData = itemDatas[0]
             primaryImage.radius = itemCornerRadius.toFloat()
 
             smallImage1.itemPreviewLoader = itemPreviewLoader
-            smallImage1.itemData = attachments[1]
+            smallImage1.itemData = itemDatas[1]
             smallImage1.radius = itemCornerRadius.toFloat()
 
             smallImage2.itemPreviewLoader = itemPreviewLoader
-            smallImage2.itemData = attachments[2]
+            smallImage2.itemData = itemDatas[2]
             smallImage2.radius = itemCornerRadius.toFloat()
 
             smallImage3.itemPreviewLoader = itemPreviewLoader
-            smallImage3.itemData = attachments[3]
+            smallImage3.itemData = itemDatas[3]
             smallImage3.radius = itemCornerRadius.toFloat()
 
             clickListener?.let {
