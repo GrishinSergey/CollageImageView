@@ -1,5 +1,6 @@
 package com.sagrishin.collageview.default.binders
 
+import android.graphics.drawable.PaintDrawable
 import android.view.View
 import com.sagrishin.collageview.*
 import kotlinx.android.synthetic.main.layout_collage_4_small_1_big_vertical.view.*
@@ -35,6 +36,10 @@ class FiveImagesFirstVerticalBinder(
             if (showCountMore) {
                 listOf(countMoreShadow, countMoreText).isVisible = true
                 countMoreText.text = view.context.getString(R.string.count_more_format, itemDatas.size - 5)
+
+                countMoreShadow.background = PaintDrawable(context.getColor(R.color.shadow_color)).apply {
+                    setCornerRadius(itemCornerRadius.toFloat())
+                }
 
                 clickListener?.let {
                     countMoreShadow.setOnClickListener { clickListener.invoke(null) }
