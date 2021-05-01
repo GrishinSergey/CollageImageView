@@ -22,7 +22,7 @@ allprojects {
 <p>2) Then add to your app (or another module, where you will use the lib) this dependency:</p>
 
 ```gradle
-implementation 'com.github.GrishinSergey:CollageImageView:v2.0.1'
+implementation 'com.github.GrishinSergey:CollageImageView:<actual-lib-version>'
 ```
 
 <p>3) In your layout you should place this:</p>
